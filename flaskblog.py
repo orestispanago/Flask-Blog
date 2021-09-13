@@ -6,7 +6,7 @@ posts = [
     {
         'author': 'John Doe',
         'title': 'Blog post 1',
-        'content': 'First post content',
+        'content': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ',
         'date_posted': 'September 11, 2021'
     },
     {
