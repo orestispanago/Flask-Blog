@@ -2,11 +2,13 @@
 
 {% block content %}
 {% for post in posts %}
-<p>By <a href="#">{{ post.author }}</a>,
-    <small class="grey-text text-darken-2">{{ post.date_posted }}</small>
-</p>
-<h3><a href="#">{{ post.title }}</a></h3>
-<p style="text-align: justify">{{ post.content }}</p>
-<br>
+<div class="section">
+    <h5><a href="#">{{ post.title }}</a></h5>
+    <p>By <a href="#">{{ post.author }}</a>,
+        <small class="grey-text text-darken-2">{{ post.date_posted }}</small>
+    </p>
+    <p style="text-align: justify">{{ post.content }}</p>
+</div>
+<div class="divider"></div>
 {% endfor %}
 {% endblock content%}
