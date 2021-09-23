@@ -6,10 +6,10 @@
     <!-- Materialize CSS -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
-    <link type="text/css" rel="stylesheet" href="static/css/materialize.css" media="screen,projection" />
+    <link type="text/css" rel="stylesheet" href="static/css/materialize.css" media="screen,projection"/>
 
     <!--Let browser know website is optimized for mobile-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
     {% if title %}
     <title>Flask Blog - {{title}}</title>
@@ -20,68 +20,73 @@
 </head>
 
 <body>
-    <header>
-        <nav>
-            <div class="nav-wrapper blue-grey darken-1">
+<header>
+    <nav>
+        <div class="nav-wrapper blue-grey darken-1">
+            <div class="container">
                 <div class="container">
-                    <div class="container">
-                        <a href="/" class="brand-logo">Flask blog</a>
-                        <a href="/" data-target="mobile-demo" class="sidenav-trigger"><i
-                                class="material-icons">menu</i></a>
+                    <a href="/" class="brand-logo">Flask blog</a>
+                    <a href="/" data-target="mobile-demo" class="sidenav-trigger"><i
+                            class="material-icons">menu</i></a>
+                    <ul class="right hide-on-med-and-down">
                         <ul class="right hide-on-med-and-down">
-                            <ul class="right hide-on-med-and-down">
-                                <li><a href="{{ url_for('home') }}">Home</a></li>
-                                <li><a href="{{ url_for('about') }}">About</a></li>
-                                <li><a href="{{ url_for('login') }}">Login</a></li>
-                                <li><a href="{{ url_for('register') }}">Register</a></li>
-                            </ul>
+                            <li><a href="{{ url_for('home') }}">Home</a></li>
+                            <li><a href="{{ url_for('about') }}">About</a></li>
+                            {% if current_user.is_authenticated %}
+                            <li><a href="{{ url_for('account') }}">Account</a></li>
+                            <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                            {% else %}
+                            <li><a href="{{ url_for('login') }}">Login</a></li>
+                            <li><a href="{{ url_for('register') }}">Register</a></li>
+                            {% endif %}
+                        </ul>
+                </div>
+            </div>
+    </nav>
+    <ul class="sidenav" id="mobile-demo">
+        <li><a href="{{ url_for('home') }}">Home</a></li>
+        <li><a href="{{ url_for('about') }}">About</a></li>
+        <li><a href="{{ url_for('login') }}">Login</a></li>
+        <li><a href="{{ url_for('register') }}">Register</a></li>
+    </ul>
+
+</header>
+
+<body>
+<div class="container">
+    <main role="main" class="container">
+        <div class="row">
+            <div class="col s8">
+                {% with messages =get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                {% for category, message in messages %}
+                <div class="card-panel green accent-1">
+                    {{ message }}
+                </div>
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
+                {% block content %}{% endblock %}
+            </div>
+            <div class="col m4 s8">
+                <div class="card blue-grey darken-1">
+                    <div class="card-content white-text">
+                        <span class="card-title">Our sidebar</span>
+                        <p>You can put any information here you'd like.</p>
+                    </div>
+                    <div class="card-action">
+                        <ul>
+                            <li><a href="#">Latest Posts</a></li>
+                            <li><a href="#">News</a></li>
+                            <li><a href="#">Calendars</a></li>
+                            <li><a href="#">etc</a></li>
+                        </ul>
                     </div>
                 </div>
-        </nav>
-        <ul class="sidenav" id="mobile-demo">
-            <li><a href="{{ url_for('home') }}">Home</a></li>
-            <li><a href="{{ url_for('about') }}">About</a></li>
-            <li><a href="{{ url_for('login') }}">Login</a></li>
-            <li><a href="{{ url_for('register') }}">Register</a></li>
-        </ul>
-
-    </header>
-
-    <body>
-        <div class="container">
-            <main role="main" class="container">
-                <div class="row">
-                    <div class="col s8">
-                        {% with messages =get_flashed_messages(with_categories=true) %}
-                        {% if messages %}
-                            {% for category, message in messages %}
-                                <div class="card-panel green accent-1">
-                                    {{ message }}
-                                </div>
-                            {% endfor %}
-                        {% endif %}
-                        {% endwith %}
-                        {% block content %}{% endblock %}
-                    </div>
-                    <div class="col m4 s8">
-                        <div class="card blue-grey darken-1">
-                            <div class="card-content white-text">
-                                <span class="card-title">Our sidebar</span>
-                                <p>You can put any information here you'd like.</p>
-                            </div>
-                            <div class="card-action">
-                                <ul>
-                                    <li> <a href="#">Latest Posts</a></li>
-                                    <li><a href="#">News</a></li>
-                                    <li><a href="#">Calendars</a></li>
-                                    <li><a href="#">etc</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </main>
+            </div>
         </div>
-    </body>
-    <script type="text/javascript" src="static/js/materialize.js"></script>
+    </main>
+</div>
+</body>
+<script type="text/javascript" src="static/js/materialize.js"></script>
 </body>
