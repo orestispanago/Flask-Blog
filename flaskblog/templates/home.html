@@ -3,11 +3,16 @@
 {% block content %}
 {% for post in posts %}
 <div class="section">
-    <h5><a href="#">{{ post.title }}</a></h5>
-    <p>By <a href="#">{{ post.author }}</a>,
-        <small class="grey-text text-darken-2">{{ post.date_posted }}</small>
+    <div class="col s2">
+        <img src="{{ url_for('static', filename='profile/'+ post.author.image_file) }}" alt=""
+             class="circle responsive-img"> <!-- notice the "circle" class -->
+    </div>
+    <h5><a href="{{ url_for('post', post_id=post.id) }}">{{ post.title }}</a></h5>
+    <p>By <a href="#">{{ post.author.username }}</a>,
+        <small class="grey-text text-darken-2">{{ post.date_posted.strftime('%Y-%m-%d') }}</small>
     </p>
     <p style="text-align: justify">{{ post.content }}</p>
+
 </div>
 <div class="divider"></div>
 {% endfor %}

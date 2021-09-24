@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="section">
+    <div class="col s2">
+        <img src="{{ url_for('static', filename='profile/'+ post.author.image_file) }}" alt=""
+             class="circle responsive-img"> <!-- notice the "circle" class -->
+    </div>
+    <h5>{{ post.title }}</h5>
+    <p>By {{ post.author.username }},
+        <small class="grey-text text-darken-2">{{ post.date_posted.strftime('%Y-%m-%d') }}</small>
+        {% if post.author == current_user %}
+    <div>
+        <a class="btn waves-effect waves-teal" href="{{ url_for('update_post', post_id=post.id) }}">Update</a>
+        <!-- Modal Trigger -->
+        <a class="waves-effect waves-light red lighten-2 btn modal-trigger" href="#modal1">Delete</a>
+        <!-- Modal Structure -->
+        <div id="modal1" class="modal">
+            <div class="modal-content">
+                <h4>Delete post</h4>
+                <p>This action cannot be undone!</p>
+            </div>
+            <div class="modal-footer">
+                <a href="javascript:void(0);"
+                   class="modal-close waves-effect waves-light yellow lighten-2 btn-flat">Cancel</a>
+                <a href="{{ url_for('delete_post', post_id=post.id) }}"
+                   class="modal-close waves-effect waves-light red lighten-2 btn-flat">Delete</a>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    </p>
+    <p style="text-align: justify">{{ post.content }}</p>
+</div>
+<div class="divider"></div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var elems = document.querySelectorAll('.modal');
+  var instances = M.Modal.init(elems);
+});
+
+
+
+
+
+</script>
+{% endblock content%}
