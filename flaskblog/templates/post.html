@@ -7,7 +7,7 @@
              class="circle responsive-img"> <!-- notice the "circle" class -->
     </div>
     <h5>{{ post.title }}</h5>
-    <p>By {{ post.author.username }},
+    <p>By <a href="{{ url_for('user_posts', username=post.author.username) }}">{{ post.author.username }},
         <small class="grey-text text-darken-2">{{ post.date_posted.strftime('%Y-%m-%d') }}</small>
         {% if post.author == current_user %}
     <div>
@@ -38,10 +38,6 @@ document.addEventListener('DOMContentLoaded', function() {
   var elems = document.querySelectorAll('.modal');
   var instances = M.Modal.init(elems);
 });
-
-
-
-
 
 </script>
 {% endblock content%}
