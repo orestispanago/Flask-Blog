@@ -8,8 +8,8 @@
             <img src="{{ url_for('static', filename='profile/'+ post.author.image_file) }}" alt=""
                  class="circle responsive-img"> <!-- notice the "circle" class -->
         </div>
-        <h5><a href="{{ url_for('post', post_id=post.id) }}">{{ post.title }}</a></h5>
-        <p>By <a href="{{ url_for('user_posts', username=post.author.username) }}">{{ post.author.username }}</a>,
+        <h5><a href="{{ url_for('posts.post', post_id=post.id) }}">{{ post.title }}</a></h5>
+        <p>By <a href="{{ url_for('users.user_posts', username=post.author.username) }}">{{ post.author.username }}</a>,
             <small class="grey-text text-darken-2">{{ post.date_posted.strftime('%Y-%m-%d') }}</small>
         </p>
         <p style="text-align: justify">{{ post.content }}</p>
@@ -21,9 +21,9 @@
     {% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
         {% if page_num %}
             {% if posts.page == page_num %}
-                <li class="active teal lighten-2"><a href="{{ url_for('user_posts', username=user.username, page=page_num) }}">{{ page_num }}</a></li>
+                <li class="active teal lighten-2"><a href="{{ url_for('users.user_posts', username=user.username, page=page_num) }}">{{ page_num }}</a></li>
             {% else %}
-                <li><a href="{{ url_for('user_posts', username=user.username, page=page_num) }}">{{ page_num }}</a></li>
+                <li><a href="{{ url_for('users.user_posts', username=user.username, page=page_num) }}">{{ page_num }}</a></li>
             {% endif %}
         {% else %}
             ...
