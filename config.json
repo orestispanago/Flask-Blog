@@ -1,0 +1,6 @@
+{
+  "SECRET_KEY": "MySecretKey",
+  "SQLALCHEMY_DATABASE_URI": "MyDatabaseURI",
+  "EMAIL_USER": "MyEmailUsername",
+  "EMAIL_PASS": "MyEmailPassword"
+}

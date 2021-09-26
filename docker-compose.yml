@@ -4,11 +4,6 @@ services:
     container_name: flask_app_container
     build: .
     command: python run.py
-    environment:
-    - SECRET_KEY=MySecretKey
-    - SQLALCHEMY_DATABASE_URI=MyDatabaseURI
-    - EMAIL_USER=MyEmailUsername
-    - EMAIL_PASS=MyEmailPassword
     ports:
       - "5000:5000"
     volumes:
