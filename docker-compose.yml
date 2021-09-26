@@ -2,17 +2,33 @@ version: "3"
 services:
   flask_app:
     container_name: flask_app_container
+    restart: always
     build: .
-    command: python run.py
+    command: gunicorn -w 1 run:app -b 0.0.0.0
     ports:
-      - "5000:5000"
+      - "8000:8000"
     volumes:
       - .:/python-flask
     networks:
       flask_network:
-        ipv4_address: 172.20.0.2
+        ipv4_address: 172.21.0.2
+        
+  nginx:
+    container_name: nginx
+    restart: always
+    build: ./nginx
+    ports:
+      - "88:88"
+    depends_on:
+      - flask_app
+    volumes:
+      - .:/python-flask
+    networks:
+      flask_network:
+        ipv4_address: 172.21.0.3
+        
 networks:
   flask_network:
     ipam:
       config:
-        - subnet: 172.20.0.0/24
+        - subnet: 172.21.0.0/24
