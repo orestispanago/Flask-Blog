@@ -4,7 +4,7 @@ services:
     container_name: flask_app_container
     restart: always
     build: .
-    command: gunicorn -w 1 run:app -b 0.0.0.0
+    command: gunicorn --env SCRIPT_NAME=/flaskblog -w 1 run:app -b 0.0.0.0
     ports:
       - "127.0.0.1:8000:8000"
     volumes:
