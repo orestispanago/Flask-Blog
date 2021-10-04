@@ -12,21 +12,7 @@ services:
     networks:
       flask_network:
         ipv4_address: 172.21.0.2
-        
-  nginx:
-    container_name: nginx
-    restart: always
-    build: ./nginx
-    ports:
-      - "88:88"
-    depends_on:
-      - flask_app
-    volumes:
-      - .:/python-flask
-    networks:
-      flask_network:
-        ipv4_address: 172.21.0.3
-        
+
 networks:
   flask_network:
     ipam:
